@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dice Gods Player Creator</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_create_button">Create</string>
+    <string name="main_play_button">Play</string>
+    <string name="title_activity_player_creator">Player Creator</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="creator_name_label">Name</string>
+    <string name="creator_deity_label">Deity</string>
+    <string name="creator_deity_prompt_label">Choose a Deity</string>
+    <string-array name="creator_deities">
+        <item>Zeus</item>
+        <item>Poseidon</item>
+    </string-array>
+    <string name="creator_clear_button">Clear</string>
+    <string name="creator_save_button">Save</string>
+
+</resources>
