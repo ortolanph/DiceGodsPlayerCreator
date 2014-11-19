@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:stretchColumns="1"
-    tools:context="org.dicegods.dicegodsplayercreator.PlayerCreator$PlaceholderFragment">
+    tools:context="org.dicegods.dicegodsplayercreator.PlayerCreatorActivity$PlaceholderFragment">
 
     <TableRow
         android:id="@+id/tableRow0"
@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="2"
-            android:visibility="invisible"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </TableRow>

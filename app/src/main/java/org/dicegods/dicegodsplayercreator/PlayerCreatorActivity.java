@@ -14,12 +14,13 @@ import android.widget.TextView;
 
 import org.dicegods.dicegodsplayercreator.beans.Player;
 import org.dicegods.dicegodsplayercreator.controller.PlayerCreatorController;
+import org.dicegods.dicegodsplayercreator.persistence.PlayerPersistence;
 import org.json.JSONException;
 
 import java.io.IOException;
 
 
-public class PlayerCreator extends Activity {
+public class PlayerCreatorActivity extends Activity {
 
     private PlayerCreatorController controller;
 
@@ -32,26 +33,28 @@ public class PlayerCreator extends Activity {
     }
 
     public void save(View view) {
-        controller = new PlayerCreatorController();
+        PlayerPersistence persistence = new PlayerPersistence(getApplicationContext());
+
+        controller = new PlayerCreatorController(persistence);
 
         EditText playerName = (EditText)findViewById(R.id.playerName);
-        Spinner choosenDeity = (Spinner)findViewById(R.id.deities);
+        Spinner chosenDeity = (Spinner)findViewById(R.id.deities);
 
-        String deity = choosenDeity.getSelectedItem().toString();
+        String deity = chosenDeity.getSelectedItem().toString();
 
         Player player = controller.createPlayer(playerName.getText().toString(), deity);
-
-        System.out.println(player.toString());
 
         TextView message = (TextView)findViewById(R.id.msg_text);
 
         try {
-            controller.savePlayer(getApplicationContext(), player);
+            controller.savePlayer(player);
         } catch (IOException e) {
             message.setText(e.getMessage());
         } catch (JSONException e) {
             message.setText(e.getMessage());
         }
+
+        message.setText("Loyal player is commited! That the battle begin!");
     }
 
     @Override

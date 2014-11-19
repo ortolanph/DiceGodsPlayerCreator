@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.dicegods.dicegodsplayercreator.PlayerCreator"
+            android:name=".PlayerCreatorActivity"
             android:label="@string/title_activity_player_creator" >
         </activity>
     </application>

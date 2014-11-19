@@ -1,7 +1,5 @@
 package org.dicegods.dicegodsplayercreator.controller;
 
-import android.content.Context;
-
 import org.dicegods.dicegodsplayercreator.beans.Attribute;
 import org.dicegods.dicegodsplayercreator.beans.GodsEnum;
 import org.dicegods.dicegodsplayercreator.beans.ItemBelt;
@@ -23,6 +21,10 @@ public class PlayerCreatorController {
     private PlayerPersistence playerPersistence;
 
     private static final String NOT_SUMMONED = "Mortal champion %s has not been summoned.";
+
+    public PlayerCreatorController(PlayerPersistence playerPersistence) {
+        this.playerPersistence = playerPersistence;
+    }
 
     public Player createPlayer(String name, String deity) {
         Player player = new Player();
@@ -47,10 +49,12 @@ public class PlayerCreatorController {
 
         player.setShield(0);
 
+        LOGGER.log(Level.INFO, player.toString());
+
         return player;
     }
 
-    public void savePlayer(Context context, Player player) throws IOException, JSONException {
+    public void savePlayer(Player player) throws IOException, JSONException {
         try {
             JSONObject jsonLife = new JSONObject()
                     .put("initial", player.getLife().getInitial())
@@ -77,9 +81,8 @@ public class PlayerCreatorController {
                     .put("elixirs", jsonElixirs)
                     .put("shield", player.getShield());
 
-            System.out.println(jsonPlayer.toString());
+            LOGGER.log(Level.INFO, jsonPlayer.toString());
 
-            playerPersistence = new PlayerPersistence(context);
             playerPersistence.savePlayer(jsonPlayer);
 
         } catch(IOException e) {
