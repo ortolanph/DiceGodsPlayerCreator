@@ -1,21 +1,22 @@
 package org.dicegods.dicegodsplayercreator;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.dicegods.dicegodsplayercreator.beans.Player;
 import org.dicegods.dicegodsplayercreator.controller.PlayerCreatorController;
+import org.json.JSONException;
+
+import java.io.IOException;
 
 
 public class PlayerCreator extends Activity {
@@ -41,6 +42,16 @@ public class PlayerCreator extends Activity {
         Player player = controller.createPlayer(playerName.getText().toString(), deity);
 
         System.out.println(player.toString());
+
+        TextView message = (TextView)findViewById(R.id.msg_text);
+
+        try {
+            controller.savePlayer(getApplicationContext(), player);
+        } catch (IOException e) {
+            message.setText(e.getMessage());
+        } catch (JSONException e) {
+            message.setText(e.getMessage());
+        }
     }
 
     @Override
@@ -88,8 +99,7 @@ public class PlayerCreator extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_player_creator, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_player_creator, container, false);
         }
     }
 }
